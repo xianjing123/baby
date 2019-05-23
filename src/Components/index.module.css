@@ -1,0 +1,22 @@
+.active{
+    color:red;
+}
+.tabbar_ul{
+    display:flex;
+    background:white;
+    height:.6rem;
+    width:100%;
+    text-align:center;
+    line-height:.7rem;
+    position:fixed;
+    bottom:0;
+}
+.tabbar_ul li{
+    flex:1
+}
+.tabbar_ul li a{
+    color:#333;
+    display:inline-block;
+    width:100%;
+    height:100%;
+}
