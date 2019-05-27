@@ -10,7 +10,8 @@
     line-height:.7rem;
     position:fixed;
     bottom:0;
-    z-index:999
+    z-index:999;
+    margin:0
 }
 .tabbar_ul li{
     flex:1

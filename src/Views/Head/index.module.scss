@@ -1,0 +1,208 @@
+.head{
+    background:url(http://h0.hucdn.com/open/201903/1042adb1a7a8d43e_1125x558.png) 0 0/100% no-repeat;
+    height:6.67rem;
+    padding:0 .08rem;
+    background-color:#eff1f4;
+    .topBlock{
+        display:flex;
+        padding-top:.18rem;
+        padding-bottom:.06rem;
+        .avatar{
+            width: .4rem; 
+            height:.4rem;
+            padding-right:.08rem;
+            img{
+                width: .38rem;
+                height: .38rem;
+                border:.01rem solid #fff;
+                border-radius:50%
+            }
+        }
+        .info{
+            color:white;
+            line-height:.2rem;
+            font-size:.12rem
+        }
+    }
+    .midBlock{
+        background:#ffd6b3;        
+        padding:0 .08rem .14rem .08rem;
+        border-radius:.08rem;
+        margin-bottom:.08rem;
+        .myfan{
+            height:.44rem;
+            font-size:.14rem;
+            color:#c20;
+            line-height:.44rem;
+            font-weight:bold;
+            text-indent:.02rem;
+            margin-bottom:.05rem;
+        }
+        .myprocess{
+            display:flex;
+            font-size:.12rem;
+            margin-bottom:.28rem;
+            p{                
+                color:#ff1a1a;
+                padding-right:.02rem;
+            }
+            h2{
+                color:white;
+                font-size:.12rem;
+                background-image: linear-gradient(90deg,#ff9560 0,#ff1a1a);
+                border-radius:.06rem;
+                padding:0 .02rem;
+                margin-right:.02rem;
+            }
+            div{
+                flex:1;
+                height:.08rem;
+                background:rgba(100,33,0,.2);
+                transform:translateY(.04rem);
+                margin-right:.02rem;
+                border-radius:.04rem;
+            }
+            p:first-of-type{
+                margin-left:.15rem;
+            }
+            p:last-of-type{
+                margin-right:.15rem;
+            }
+        }
+        .pic{
+            margin:0 .04rem;
+            position: relative;
+            .banner{
+                width:100%;
+                height:100%
+            }
+            p{
+                font-size:.16rem;
+                color:#fff;
+                height:.16rem;
+                line-height:.16rem;
+                position: absolute;
+                top:.1rem;
+                left:0;
+                right:0;
+                text-align:center
+            }
+            h2{
+                font-size:.12rem;
+                color:rgba(255,255,255,.8);
+                height:.12rem;
+                line-height:.12rem;
+                position: absolute;
+                top:.3rem;
+                left:0;
+                right:0;
+                text-align:center
+            }
+            div{
+                width:.67rem;
+                height:.25rem;
+                position:absolute;
+                top:-.18rem;
+                left:calc(50% - .33rem);
+                img{
+                    width:100%;
+                    height:100%;
+                }
+                h3{
+                    font-size:.12rem;
+                    height:.12rem;
+                    line-height:.12rem;
+                    color:#953030;
+                    font-weight:bold;
+                    position:absolute;
+                    top:calc(50% - .06rem);
+                    left:calc(50% - .25rem);
+                }
+            }
+        }
+        .levelUp{
+            width:100%;
+            height:.84rem;
+           img{
+            width:100%;
+            height:100%
+           }
+        }
+    }
+    .bottomBlock{
+        background:white;
+        border-radius:.08rem;
+        .title{
+            height:.43rem;
+            border-bottom:.01rem solid #eff1f4;
+            padding-left:.12rem;
+            font-size: 0.16rem;
+            line-height:.43rem;
+        }
+        ul{
+            overflow:hidden;
+            li{
+                display:flex;
+                margin-top:.18rem;
+                margin-bottom:.11rem;
+                .itemPic{
+                    width:1.15rem;
+                    height:1.2rem;
+                    margin-right:.13rem;
+                    margin-left:.12rem;
+                    img{
+                        width:100%;
+                        height:100%
+                    }
+                }
+                .text{
+                    flex:1;
+                    position: relative;
+                    img{
+                        position:absolute;
+                        width:.55rem;
+                        height:.15rem;
+
+                    }
+                    h3{
+                        height:.4rem;
+                        font-size:.14rem;
+                        margin-right:.31rem;
+                        text-indent:.57rem;
+                        color:#666;
+                        line-height:.2rem;  
+                        display: -webkit-box;
+                        overflow: hidden;
+                        word-break: break-all;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 2;
+                    }
+                    p{
+                        font-size:.12rem;
+                        font-weight:bold;
+                        line-height:.12rem;
+                        height:.12rem;
+                        margin:.04rem 0 .12rem 0
+                    }
+                    h2{
+                        font-size:.18rem;
+                        color:#ff2436;
+                        font-weight:bold
+                    }
+                    div{
+                        background-image: linear-gradient(-45deg,rgba(255,38,38,.99),#ff5319);
+                        padding:0.08rem .1rem;
+                        font-size:.12rem;
+                        line-height:.12rem;
+                        color:white;
+                        position:absolute;
+                        border-radius:0.16rem;
+                        bottom:0;
+                        right:.12rem
+                    }
+                }
+            }
+        }
+    }
+
+}

@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "antd": "^3.19.0",
+    "antd-mobile": "^2.2.13",
     "axios": "^0.18.0",
     "babel-plugin-import": "^1.11.2",
     "node-sass": "^4.12.0",
