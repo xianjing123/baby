@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 
 class App extends React.Component{
   render(){
-    return <div className="App_margin_top">
+    return <div className={"App_margin_top"}>
           {
             this.props.isShow?
             <Tabbar></Tabbar>

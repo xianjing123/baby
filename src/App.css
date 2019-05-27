@@ -12,6 +12,6 @@ a{
   text-decoration: none;
   color:black;
 }
-.App_margin_top{
-  margin-bottom:.6rem;
+html{
+  background:#f8f8f8;
 }
