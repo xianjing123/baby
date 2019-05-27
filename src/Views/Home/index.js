@@ -83,7 +83,7 @@ class Home extends Component{
           </div>
         
 
-          <span className={style.icon} onClick={this.fanhuidingbu.bind(this)}>⇡</span>
+          <span className={style.icon} ref='header' onClick={this.fanhuidingbu}>⇡</span>
 
 
 
@@ -142,13 +142,26 @@ class Home extends Component{
       })
 
             axios.get(`/martshow/v1/7702-1-all-0-1-0-12.html?client_info=&h5_uid=null`).then(res=>{
-        console.log(res.data.martshows)
-        console.log(res.data.martshows.type_home_item_single)
+        // console.log(res.data.martshows)
+        // console.log(res.data.martshows.type_home_item_single)
         this.setState({
           shoplist:res.data.martshows
-       
-
+    
       })
+    })
+
+    window.addEventListener('scroll',()=>{
+      var header = this.refs.header;
+      var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+      if(scrollTop<700){
+        console.log('aaaaaa')
+        header.style.position = 'relative';
+        header.style.display = 'none'
+      }else if(scrollTop>700){
+        console.log('bbbb')
+        header.style.position = 'fixed';
+        header.style.display = 'block'
+      }
     })
   }
 
