@@ -1,8 +1,9 @@
 import React,{Component} from 'react'
 import axios from 'axios'
 import style from './index.module.scss'
-import {Switch,Router,Redirect} from 'react-router-dom'
-//import InfiniteScroll from 'react-infinite-loading';
+// import {Switch,Route} from 'react-router-dom'
+import Detail from '../Detail'
+//import Infinite from 'react-infinite-loading';
 // import withRouter from 'react-router-dom'
 
 class Home extends Component{
@@ -12,7 +13,13 @@ class Home extends Component{
       shoplist:[]
     }
     render(){
-        return <div> {
+        return <div> 
+          {/* <Switch>
+            <Route path='../Detail/:kerwinid'  component={Detail} /> 
+          </Switch> */}
+
+        
+        {
           this.state.data?
           <div className={style.header}>
             <img className={style.headerimg} src={this.state.data.img} alt={this.state.data.desc}/>
@@ -52,11 +59,15 @@ class Home extends Component{
           <div>
           <p className={style.p1}>每天9点准时上新</p>
 {/* ----------------------------------------------------------------------------------------------------------- */}
+          
           <ul>
             {
               this.state.shoplist.map(item=>
                 <li key={item.type_home_item_single.product_id} data={item}>
+                <div className={style.imglist}>
                 <img onClick={this.lijituan.bind(this)} className={style.productimg} src={item.type_home_item_single.img}  alt={item.type_home_item_single.notify_body} />
+                <img  className={style.productjieshao} src={item.type_home_item_single.icon_promotions.icon} alt={item.type_home_item_single.notify_body}/>
+                </div>
                 <div className={style.product}>
                 <h5>{item.type_home_item_single.title}</h5>
                 <p className={style.productmiaoshu}>{item.type_home_item_single.promotion_desc}</p>
@@ -68,19 +79,34 @@ class Home extends Component{
               )
             }
           </ul>
+
           </div>
         
 
-          <span className={style.icon} onClick={this.fanhuidingbu.bind(this)}>↑</span>
+          <span className={style.icon} onClick={this.fanhuidingbu.bind(this)}>⇡</span>
 
 
 
         </div>
 
     }
+    
+    // handleLoading(){
+    //   axios.get(`/martshow/v1/7702-1-all-0-1-0-12.html?client_info=&h5_uid=null`).then(res=>{
+    //     console.log(res.data.martshows)
+    //     this.setState({
+    //       shoplist:res.data.martshows
+       
+
+    //   })
+    // })
+
+    
 
     fanhuidingbu(){
       console.log('cccc')
+      document.body.scrollTop = document.documentElement.scrollTop = 0
+      
     }
 
     lijiqianwang(){
@@ -117,15 +143,16 @@ class Home extends Component{
 
             axios.get(`/martshow/v1/7702-1-all-0-1-0-12.html?client_info=&h5_uid=null`).then(res=>{
         console.log(res.data.martshows)
+        console.log(res.data.martshows.type_home_item_single)
         this.setState({
           shoplist:res.data.martshows
        
 
       })
-
-
     })
   }
+
+
   }
 
 export default Home
