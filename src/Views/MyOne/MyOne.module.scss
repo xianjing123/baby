@@ -1,0 +1,17 @@
+.clear:after{ content:""; display: block; clear:both;}
+.block{
+    float: left;
+}
+.imgs{
+    width: 1.87rem;
+    height:1.70rem;
+}
+.title{ 
+    width:1.5rem;
+    overflow: hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+}
+.price{
+    color: red;
+}

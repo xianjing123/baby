@@ -1,7 +1,7 @@
 import React from 'react';
 import Tabbar from './Components'
 import './App.css'
-import store from './Store'
+// import store from './Store'
 import {connect} from 'react-redux'
 
 class App extends React.Component{
