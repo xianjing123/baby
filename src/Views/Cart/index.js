@@ -13,7 +13,8 @@ class Cart extends Component{
         total:null,
         datalist:[],
         allChecked:false,
-        span:1
+        span:1,
+        allprice:0
     }
     render(){
         return <div>
@@ -23,26 +24,26 @@ class Cart extends Component{
             </div>
             <div className={style.shop} style={this.state.shopcar}>
                 <div className={style.shop_cart}>
-                    <span>￥{this.state.total}</span>
+                    <span>￥{this.state.allprice}</span>
                 </div>
                 <label><input type="checkbox"/>全选</label>
                 <ul className={style.shop_goods}>
                 {
-                    this.state.datalist.map(res=>
+                    this.state.datalist.map((res,index)=>
                         <li key={res.iid}>
                             <section>
                                 <div className={style.cart_input_list}>
-                                    <input type="checkbox" onClick={this.onChange.bind(this)}/>
+                                    <input type="checkbox" onClick={this.onChange.bind(this,index)} defaultChecked={this.state.datalist[index].checked}/>
                                 </div>
                                 <div className={style.cart_item_list}>
                                     <img src={res.img} alt=""/>
                                     <div className={style.cart_content}>
                                         <p style={{"WebkitBoxOrient": "vertical"}} className={style.cart_name}>{res.title}</p>
                                         <span>{res.sale_tip}</span>
-                                        <p className={style.cart_price} onClick={this.subtract.bind(this)}>￥{
-                                            res.price<10000?(""+res.price).slice(0,2):(""+res.price).slice(0,3)
+                                        <p className={style.cart_price} onClick={this.subtract.bind(this,index)}>￥{
+                                            res.price/100
                                         }</p>
-                                        <p className={style.cart_number} onClick={this.addition.bind(this)}>×{this.state.span}</p>
+                                        <p className={style.cart_number} onClick={this.addition.bind(this,index)}>×{res.count}</p>
                                     </div>
                                 </div>
                             </section>
@@ -50,7 +51,7 @@ class Cart extends Component{
                                 <p>
                                     <span>小计:</span>
                                     <b>￥{
-                                        res.price<10000?(""+res.price).slice(0,2):(""+res.price).slice(0,3)
+                                        res.price/100*res.count
                                     }</b>
                                 </p>
                             </div>
@@ -85,31 +86,88 @@ class Cart extends Component{
             </div>
         </div>
     }
-    onChange(){
-        console.log('aaaa')
+    onChange(index){
+        var a = JSON.parse(JSON.stringify(this.state.datalist))
+        a[index].checked=!a[index].checked
+        
+        this.setState({
+            datalist:a
+        })
+        setTimeout(()=>{
+            
+            this.setState({
+                allprice:this.countprice()
+            })
+        },0)
     }
-    subtract(){
+    subtract(index){
         this.setState({
             span:this.state.span<=1?this.state.span:this.state.span-1
         })
+        if(this.state.datalist[index].count>1){
+            var a = JSON.parse(JSON.stringify(this.state.datalist))
+            a[index].count--
+            
+            this.setState({
+                datalist:a,            
+            })
+            setTimeout(()=>{
+                this.setState({
+                    allprice:this.countprice()
+                })
+            },0)
+        }
+        
     }
-    addition(){
+    countprice(){
+        // console.log(this.state.datalist)
+        // console.log('11')
+        var sum = 0;
+        for(var i=0;i<this.state.datalist.length;i++){
+            if(this.state.datalist[i].checked){
+                sum=sum + this.state.datalist[i].price*(this.state.datalist[i].count)
+            }
+        }
+        return sum/100
+    }
+    addition(index){
+        var a = JSON.parse(JSON.stringify(this.state.datalist))
+        a[index].count++
+        
         this.setState({
-            span:this.state.span+1
+            datalist:a,
+                
         })
+        setTimeout(()=>{
+            this.setState({
+                allprice:this.countprice()
+            })
+        },0)
+        
     }
     handleClick(data,price,id){
-        console.log(data)
-        this.setState({
-            no_shopcar:{
-                display:"none"
-            },
-            shopcar:{
-                display:"block"
-            },
-            datalist:Array.from(new Set([...this.state.datalist,data])),
-            total:this.state.total+price/100
-        })
+        data.count=1
+        data.checked=true
+        if (this.state.datalist.map(res=>{
+            return res.iid
+        }).indexOf(data.iid)==-1){
+            this.setState({
+                no_shopcar:{
+                    display:"none"
+                },
+                shopcar:{
+                    display:"block"
+                },
+                datalist:[...this.state.datalist,data]
+            })
+            setTimeout(()=>{
+                this.setState({
+                    allprice:this.countprice()
+                })
+            },0)
+        }
+        
+       
     }
 }
 
