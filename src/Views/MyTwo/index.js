@@ -2,7 +2,7 @@ import React,{Component} from 'React'
 import axios from 'axios'
 import style from './swipe.module.scss'
 import { Carousel } from 'antd'
-// import { Carousel, WingBlank } from 'antd-mobile'
+
 import {hideTabbar,showTabbar} from '../Package/action.js'
 import {connect} from 'react-redux'
 
@@ -13,39 +13,11 @@ class MyTwo extends Component{
         hour: 0,
         minute: 0,
         second: 0,
-        // data: ['1', '2', '3'],
-        // imgHeight: 176
+       
 
     })
     render(){
         return <div>
-             {/* <WingBlank>
-        <Carousel
-          autoplay={false}
-          infinite
-          beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
-          afterChange={index => console.log('slide to', index)}
-        >
-          {this.state.data.map(val => (
-            <a
-              key={val}
-              href="http://www.alipay.com"
-              style={{ display: 'inline-block', width: '100%', height: this.state.imgHeight }}
-            >
-              <img
-                src={`https://zos.alipayobjects.com/rmsportal/${val}.png`}
-                alt=""
-                style={{ width: '100%', verticalAlign: 'top' }}
-                onLoad={() => {
-                  // fire window resize event to change height
-                  window.dispatchEvent(new Event('resize'));
-                  this.setState({ imgHeight: 'auto' });
-                }}
-              />
-            </a>
-          ))}
-        </Carousel>
-      </WingBlank> */}
             <Carousel className={style.swiper}>
                 <div>
                     <img src="https://b1.hucdn.com/upload/item/1807/18/24901768497097_800x800.jpg!640.webp"/>
@@ -101,12 +73,6 @@ class MyTwo extends Component{
         </div>
     }
     componentDidMount(){
-
-        // setTimeout(() => {
-        //     this.setState({
-        //       data: ['AiyWuByWklrrUDlFignR', 'TekJlZRVCjLFexlOCuWn', 'IJOtIlfsYdTyaDTRVrLI'],
-        //     });
-        //   }, 100);
 
         const end = Date.parse(new Date('2019-05-29 24:00'))
         this.countFun(end);
@@ -166,5 +132,4 @@ class MyTwo extends Component{
         showTabbar
     }
 
-    // ReactDOM.render(<App />, mountNode);
 export default connect(mapStateToProps,mapDispatchToProps)(MyTwo);

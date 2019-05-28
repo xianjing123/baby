@@ -13,7 +13,7 @@ class Package extends Component{
     })
     render(){
         let { show } = this.state;
-        return <div>
+        return <div onClick={this.handleJump.bind(this)}>
                     <div className={style.commonBack}>
                         {
                             show &&
@@ -81,6 +81,9 @@ class Package extends Component{
                                 )  
                         }
                </div>
+    }
+    handleJump(){
+        this.props.history.push('/home')
     }
     goTo(){
             let scrollToTop = window.setInterval(function() {
