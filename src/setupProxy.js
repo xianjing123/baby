@@ -23,11 +23,6 @@ module.exports = function(app) {
       target: 'https://dsapi.beibei.com',
       changeOrigin:true  
       }));
-
-      app.use(proxy('/mroute', { 
-        target: 'https://api.beibei.com',
-        changeOrigin:true  
-      }));
       app.use(proxy('/mroute.html', { 
         target: 'https://api.beibei.com',
         changeOrigin:true  

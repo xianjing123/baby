@@ -3,12 +3,26 @@
 import React,{Component} from 'react'
 import style from './index.module.scss'
 import axios from 'axios'
-import {PullToRefresh} from 'antd-mobile'
 import 'antd-mobile/dist/antd-mobile.css'
-import { Toast} from 'antd-mobile';
+import { Toast,PullToRefresh} from 'antd-mobile';
 class Head extends Component{
     render(){
         return <div className={style.head}>
+            {
+                this.state.ismaskshow?<div className={style.mask}>
+                    <img src="http://t1.hucdn.com/upload/member/1905/28/12974903878826_750x1334.png" alt="" className={style.kuang}/>
+                    <img src={this.state.maskimg} alt="" className={style.good1}/> 
+                    <div className={style.masktext}>
+                        <p className={style.p}>{this.state.des}</p>
+                        <h2 className={style.h2}>￥{parseFloat(this.state.price/100)}</h2>
+                    </div>
+                    <img className={style.close} src="images/close.jpg" alt="×" onClick={()=>{
+                        this.setState({
+                            ismaskshow:false
+                        })
+                    }}/>
+                </div>:null
+            }
             <div className={style.topBlock}>
                 <div className={style.avatar}>
                     <img src={this.state.avatar} alt=""/>
@@ -42,22 +56,47 @@ class Head extends Component{
             </div>
             <div className={style.bottomBlock}>
                 <div className={style.title}>邀新专区</div>
-                <PullToRefresh>
+                <PullToRefresh
+                    direction="up"
+                    style={{marginBottom:'.6rem'}}
+                    onRefresh={()=>{
+                        this.setState({
+                            page:this.state.page+1
+                        })
+                        axios({
+                            url:`/mroute.html?method=beibei.vip.captain.home.get&_airborne_channel=beibei&page=${this.state.page}`
+                        }).then(res=>{
+                            var a = res.data.invite_items_area.invite_items
+                            var b = this.state.data
+                            b.invite_items_area.invite_items = [...b.invite_items_area.invite_items,...a]                               
+                            this.setState({
+                                data:b
+                            })
+                            console.log(this.state.data)
+                        })
+                    }}
+                >
                     {
                         this.state.data.invite_items_area===undefined?null:this.state.data.invite_items_area.invite_items.map(item=>
-                            <li key={item.iid}>
-                               <div className={style.itemPic}><img src={item.img} alt=""/></div>
-                               <div className={style.text}>
-                                    <img src="http://h0.hucdn.com/open/201905/101cb7ee1242d036_162x45.png" className="icon" alt=""/>
-                                    <h3>{item.title}</h3>
-                                    <p>{item.award_tip}</p>
-                                    <h2>￥{parseFloat(item.price/100)}</h2>
-                                    <div className="btn">立即邀请</div>
-                               </div>
-                               
+                            <li key={item.iid} className={style.li}>
+                                <div className={style.itemPic}><img src={item.img} alt=""/></div>
+                                <div className={style.text}>
+                                        <img src="http://h0.hucdn.com/open/201905/101cb7ee1242d036_162x45.png" className="icon" alt=""/>
+                                        <h3>{item.title}</h3>
+                                        <p>{item.award_tip}</p>
+                                        <h2>￥{parseFloat(item.price/100)}</h2>
+                                        <div className="btn" onClick={()=>{
+                                            this.setState({
+                                                ismaskshow:true,
+                                                maskimg:item.img,
+                                                price:item.price,
+                                                des:item.title
+                                            })
+                                        }}>立即邀请</div>
+                                </div>                                
                             </li>
                         )
-                    }
+                    }                    
                 </PullToRefresh>
             </div>
         </div>
@@ -68,17 +107,20 @@ class Head extends Component{
         avatar:'http://h0.hucdn.com/open/201824/a06ebf06867afc17_225x225.png',
         fansNumber:0,
         needFansNumber:20,
-        data:{}
+        data:{},
+        page:1,
+        ismaskshow:false,
+        maskimg:'',
+        des:'',
+        price:''
     }
     componentDidMount(){
         axios({
             url:'/mroute.html?method=beibei.vip.captain.home.get&_airborne_channel=beibei&page=1'
         }).then(res=>{
-            console.log(res.data)
             this.setState({
                 data:res.data
             })
-            console.log(this.state.data)
         })
     }
     f1(){
