@@ -1,0 +1,38 @@
+.navbar{
+    background:#ff430a;
+    white-space:nowrap;
+}
+.navbar1{
+    width:3.75rem;
+    overflow-x:scroll;
+    display: flex;
+    position: relative;
+    top: .049rem;
+}
+.l{
+    height: .6rem;
+    color: white;
+    margin-left: .22rem;
+    flex: 1;
+}
+.l i{
+    font-size: .2rem;
+}
+.l p{
+    position: relative;
+    top: .02rem;
+    font-size: .1rem;
+}
+
+.button i{
+    font-size:.3rem;
+    width: .4rem;
+    position: relative;
+    bottom: 0;
+}
+.commonBack div i{
+    font-size:.3rem;
+    position: fixed;
+    bottom:.5rem;
+    right:.5rem;
+}
