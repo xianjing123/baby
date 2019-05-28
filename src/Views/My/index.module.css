@@ -1,0 +1,51 @@
+
+.user_frist{
+    margin-top: .3rem;
+    position: relative;
+}
+.user_name_input{
+    width: 100%;
+    height: 0.5rem;
+    font-size: 0.16rem;
+    outline:none;
+    border:none;
+    background:white;
+    padding-left:.1rem;
+}
+.photo{
+    position: absolute;
+    top:1.1rem;
+    right:.2rem;
+}
+.reset{
+    width:.5rem;
+    height:.4rem;
+    background:#FF4965;
+    font-size:.16rem;
+    color:white;
+    text-align:center;
+    line-height:.4rem;
+    border-radius: 0.06rem;
+}
+.login_in{
+    width:3rem;
+    height:.4rem;
+    background:#FF4965;
+    font-size:.16rem;
+    color:white;
+    text-align:center;
+    line-height:.4rem;
+    margin:.2rem auto 0 auto;
+    border-radius: 0.06rem;
+}
+
+.register{
+    margin-top: 0.1rem;
+    display: flex;
+    justify-content: space-around;
+}
+
+body{
+    background-color:#f8f8f8;
+}
+
