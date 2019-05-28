@@ -1,0 +1,81 @@
+.swiper img{
+  width:3.75rem;
+  height:3rem;
+  display:block;
+}
+.flashSale{
+  background: red;
+  width: 100%;
+  display: flex;
+  position: relative;
+  top: -.02rem;
+}
+.flashSale p{
+  color: white;
+  height: .12rem;
+  padding-left: .1rem;
+}
+.flashSale h4 span{
+  margin-left: 1rem;
+  color: white;
+}
+.flashSale h4 span:nth-of-type(2){
+  margin-left: -.003rem;
+}
+.money{
+  display: flex;
+}
+.money span:nth-of-type(1){
+  color: red;
+  font-size: .25rem;
+  margin-left: .1rem;
+}
+.money span:nth-of-type(2){
+  position: relative;
+  top: .13rem;
+  text-decoration:line-through;
+}
+.money span:nth-of-type(3){
+  position: relative;
+  top: .13rem;
+  padding-left:1.64rem;
+}
+.Limit{
+  position: relative;
+  top: .1rem;
+  display: flex;
+}
+.Limit h3{
+  width: 2.5rem;
+  word-wrap: break-word;
+}
+.Limit i{
+  padding-left: .07rem;
+}
+.Limit a{
+  color: #ccc;
+  padding-left: .7rem;
+}
+.detail{
+  float: left;
+}
+.detailImg{
+  margin-left: .3rem;
+  width: .7rem;
+  height: .9rem;
+}
+.p {
+  width: .7rem;
+  margin-left: .3rem;
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow:ellipsis;
+}
+.bottomTabbar{
+  background:#ccc;
+  width: 100%;
+  height: .3rem;
+  position: fixed;
+  bottom: 0;
+}
+

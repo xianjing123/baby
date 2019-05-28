@@ -10,7 +10,10 @@ class Home extends Component{
     state = {
       data:null,
       banner:null,
-      shoplist:[]
+      shoplist:[],
+      display:{
+        display:"none"
+      }
     }
     render(){
         return <div> 
@@ -83,7 +86,7 @@ class Home extends Component{
           </div>
         
 
-          <span className={style.icon} ref='header' onClick={this.fanhuidingbu}>⇡</span>
+          <span className={style.icon} style={this.state.display} onClick={this.fanhuidingbu}>⇡</span>
 
 
 
@@ -151,16 +154,24 @@ class Home extends Component{
     })
 
     window.addEventListener('scroll',()=>{
-      var header = this.refs.header;
+      // var header = this.refs.header;
       var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
       if(scrollTop<700){
-        console.log('aaaaaa')
-        header.style.position = 'relative';
-        header.style.display = 'none'
+        // console.log('aaaaaa')
+        // header.style.position = 'relative';
+        this.setState({
+          display:{
+            display:"none"
+          }
+        })
       }else if(scrollTop>700){
-        console.log('bbbb')
-        header.style.position = 'fixed';
-        header.style.display = 'block'
+        // console.log('bbbb')
+        // header.style.position = 'fixed';
+        this.setState({
+          display:{
+            display:"block"
+          }
+        })
       }
     })
   }

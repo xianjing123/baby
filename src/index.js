@@ -1,8 +1,9 @@
-import React from 'react';// 引入核心的react 库
+// import React from 'react';// 引入核心的react 库
 import ReactDOM from 'react-dom';// 操作dom库
 // import * as serviceWorker from './serviceWorker';
 
-import router from './Router'
+import router from './Router';
+// import 'antd/dist/antd.css';
 // import App from './02-lifecycle-communicate/practice'
 
 //jsx 语法
