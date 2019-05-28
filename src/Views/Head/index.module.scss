@@ -19,9 +19,15 @@
             }
         }
         .info{
-            color:white;
+            
+            h2{
+                color:white;
+            }
+            p{
+                color:white;
             line-height:.2rem;
-            font-size:.12rem
+            font-size:.12rem;
+            }
         }
     }
     .midBlock{
@@ -53,6 +59,7 @@
                 border-radius:.06rem;
                 padding:0 .02rem;
                 margin-right:.02rem;
+                height:.18rem
             }
             div{
                 flex:1;

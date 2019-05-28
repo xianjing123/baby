@@ -3,7 +3,9 @@
 import React,{Component} from 'react'
 import style from './index.module.scss'
 import axios from 'axios'
-// import {PullToRefresh} from 'antd-mobile'
+import {PullToRefresh} from 'antd-mobile'
+import 'antd-mobile/dist/antd-mobile.css'
+import { Toast} from 'antd-mobile';
 class Head extends Component{
     render(){
         return <div className={style.head}>
@@ -13,7 +15,8 @@ class Head extends Component{
                 </div>
                 <div className={style.info}>
                     <h2>{this.state.tel}</h2>
-                    <p>我的邀请码：{this.state.yaoqingma}  <span onClick={()=>{alert('复制成功')}}>复制</span></p>
+                    <input ref="input" type="text" value={this.state.yaoqingma} style={{position:'absolute',opacity:'0',pointerEvents:'none'}}/>
+                    <p>我的邀请码：{this.state.yaoqingma}  <span onClick={this.f1.bind(this)}>复制</span></p>
                 </div>
             </div>
             <div className={style.midBlock}>
@@ -39,7 +42,7 @@ class Head extends Component{
             </div>
             <div className={style.bottomBlock}>
                 <div className={style.title}>邀新专区</div>
-                <ul>
+                <PullToRefresh>
                     {
                         this.state.data.invite_items_area===undefined?null:this.state.data.invite_items_area.invite_items.map(item=>
                             <li key={item.iid}>
@@ -55,7 +58,7 @@ class Head extends Component{
                             </li>
                         )
                     }
-                </ul>
+                </PullToRefresh>
             </div>
         </div>
     }
@@ -77,6 +80,12 @@ class Head extends Component{
             })
             console.log(this.state.data)
         })
+    }
+    f1(){
+        console.log(this)
+        this.refs.input.select()
+        document.execCommand("copy")
+        Toast.info('复制成功', 2);
     }
 }
 
