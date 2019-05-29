@@ -1,6 +1,9 @@
 import React,{Component} from 'react'
 import style from './index.module.css'
 import item from './index.json'
+import {Checkbox} from 'antd'
+import 'antd/dist/antd.css'
+import {fromJS} from 'immutable'
 
 class Cart extends Component{
     state = {
@@ -12,8 +15,9 @@ class Cart extends Component{
         },
         total:null,
         datalist:[],
-        allChecked:false,
-        span:1
+        checkedAll:true,   
+        span:1,
+        allprice:0
     }
     render(){
         return <div>
@@ -23,34 +27,40 @@ class Cart extends Component{
             </div>
             <div className={style.shop} style={this.state.shopcar}>
                 <div className={style.shop_cart}>
-                    <span>￥{this.state.total}</span>
+                    <span className={style.total}>总计:￥{this.state.allprice}</span>
+                    <div className={style.settlement} onClick={()=>{
+                        this.props.history.push("/home")
+                    }}>结算({this.state.datalist.length})</div>
                 </div>
-                <label><input type="checkbox"/>全选</label>
+                <Checkbox checked={this.state.checkedAll} style={{marginLeft:"0.05rem"}} onClick={this.checkClick.bind(this)}>全选</Checkbox>
                 <ul className={style.shop_goods}>
                 {
-                    this.state.datalist.map(res=>
+                    this.state.datalist.map((res,index)=>
                         <li key={res.iid}>
                             <section>
                                 <div className={style.cart_input_list}>
-                                    <input type="checkbox" onClick={this.onChange.bind(this)}/>
+                                    <Checkbox type="checkbox" onClick={this.onChange.bind(this,index)} checked={this.state.datalist[index].checked} className={style.checkbox}/>
                                 </div>
                                 <div className={style.cart_item_list}>
                                     <img src={res.img} alt=""/>
                                     <div className={style.cart_content}>
                                         <p style={{"WebkitBoxOrient": "vertical"}} className={style.cart_name}>{res.title}</p>
                                         <span>{res.sale_tip}</span>
-                                        <p className={style.cart_price} onClick={this.subtract.bind(this)}>￥{
-                                            res.price<10000?(""+res.price).slice(0,2):(""+res.price).slice(0,3)
+                                        <p className={style.cart_price}>￥{
+                                            res.price/100
                                         }</p>
-                                        <p className={style.cart_number} onClick={this.addition.bind(this)}>×{this.state.span}</p>
+                                        <div className={style.plus} onClick={this.addition.bind(this,index)}>+</div>
+                                        <div className={style.reduce} onClick={this.subtract.bind(this,index)}>-</div>
+                                        <p className={style.cart_number}>×{res.count}</p>
                                     </div>
                                 </div>
                             </section>
                             <div className={style.cart_subtotal}>
+                            <div className={style.delete} onClick={this.deleteList.bind(this,res,index)}>删</div>
                                 <p>
                                     <span>小计:</span>
                                     <b>￥{
-                                        res.price<10000?(""+res.price).slice(0,2):(""+res.price).slice(0,3)
+                                        res.price/100*res.count
                                     }</b>
                                 </p>
                             </div>
@@ -85,31 +95,136 @@ class Cart extends Component{
             </div>
         </div>
     }
-    onChange(){
-        console.log('aaaa')
+    deleteList(data,index){
+        const {datalist}=this.state
+        const arr = fromJS(datalist)
+        const newList = arr.splice(index,1)
+        this.setState({
+            datalist:newList.toJS()
+        })
+        setTimeout(()=>{
+            this.setState({
+                allprice:this.countprice()
+            })
+            setTimeout(()=>{
+                if(datalist.length===1){
+                    this.setState({
+                        no_shopcar:{
+                            display:"block"
+                        },
+                        shopcar:{
+                            display:"none"
+                        }
+                    })
+                }
+            },0)
+        },0)
+
     }
-    subtract(){
+    checkClick(){
+        const { checkedAll,datalist } = this.state;
+
+        datalist.map(function(item){
+            return item.checked = !item.checked;
+          })
+
+          const check = datalist.every(function(item,index){
+            return item.checked;
+          })
+          var arr = fromJS(datalist)
+          for(var i=0;i<arr.size;i++){
+              arr.getIn([i,"checked"],check)
+          }
+        this.setState({
+          checkedAll: !checkedAll,
+          datalist:arr.toJS(),
+          allprice:checkedAll?0:this.countprice()
+        });
+    }
+    onChange(index){
+        var a = JSON.parse(JSON.stringify(this.state.datalist))
+        a[index].checked=!a[index].checked
+        this.setState({
+            datalist:a,
+            checkedAll:a.every(function(item){
+                return item.checked;
+              })
+        })
+        setTimeout(()=>{
+            
+            this.setState({
+                allprice:this.countprice()
+            })
+        },0)
+    }
+    subtract(index){
         this.setState({
             span:this.state.span<=1?this.state.span:this.state.span-1
         })
+        if(this.state.datalist[index].count>1){
+            var a = JSON.parse(JSON.stringify(this.state.datalist))
+            a[index].count--
+            
+            this.setState({
+                datalist:a,            
+            })
+            setTimeout(()=>{
+                this.setState({
+                    allprice:this.countprice()
+                })
+            },0)
+        }
+        
     }
-    addition(){
+    countprice(){
+        // console.log(this.state.datalist)
+        // console.log('11')
+        var sum = 0;
+        for(var i=0;i<this.state.datalist.length;i++){
+            if(this.state.datalist[i].checked){
+                sum=sum + this.state.datalist[i].price*(this.state.datalist[i].count)
+            }
+        }
+        return sum/100
+    }
+    addition(index){
+        var a = JSON.parse(JSON.stringify(this.state.datalist))
+        a[index].count++
+        
         this.setState({
-            span:this.state.span+1
+            datalist:a,
+                
         })
+        setTimeout(()=>{
+            this.setState({
+                allprice:this.countprice()
+            })
+        },0)
+        
     }
     handleClick(data,price,id){
-        console.log(data)
-        this.setState({
-            no_shopcar:{
-                display:"none"
-            },
-            shopcar:{
-                display:"block"
-            },
-            datalist:Array.from(new Set([...this.state.datalist,data])),
-            total:this.state.total+price/100
-        })
+        data.count=1
+        data.checked=true
+        if (this.state.datalist.map(res=>{
+            return res.iid
+        }).indexOf(data.iid)===-1){
+            this.setState({
+                no_shopcar:{
+                    display:"none"
+                },
+                shopcar:{
+                    display:"block"
+                },
+                datalist:[...this.state.datalist,data]
+            })
+            setTimeout(()=>{
+                this.setState({
+                    allprice:this.countprice()
+                })
+            },0)
+        }
+        
+       
     }
 }
 

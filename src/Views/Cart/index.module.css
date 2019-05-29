@@ -125,14 +125,14 @@
 }
 .cart_input_list{
     width:.8rem;
-    height:100;
+    height:1rem;
 }
-.cart_input_list input{
-    margin:0 auto;
+.cart_input_list .checkbox{
+    margin-left:.25rem;
     display:block;
     position: relative;
     top:50%;
-    transform: translateY(-50%)
+    transform: translateY(-0.2rem)
 }
 .cart_item_list img{
     display:block;
@@ -158,8 +158,64 @@
     position:fixed;
     bottom:.58rem;
     z-index:998;
+    line-height:.4rem;
+    font-size:.14rem;
+    color:red;
 }
 .cart_content{
     padding-left:1.1rem;
     padding-right:.1rem;
+}
+.plus{
+    width:.25rem;
+    height:.25rem;
+    background:#ff4965;
+    color:white;
+    font-size:.2rem;
+    font-weight: bold;
+    border-radius: 50%;
+    text-align: center;
+    line-height:.2rem;
+    position: absolute;
+    right:.2rem;
+    bottom:0rem;
+}
+.reduce{
+    width:.25rem;
+    height:.25rem;
+    background:#ff4965;
+    color:white;
+    font-size:.22rem;
+    font-weight: bold;
+    border-radius: 50%;
+    text-align: center;
+    line-height:.2rem;
+    position: absolute;
+    right:.7rem;
+    bottom:0rem;
+}
+.total{
+    position: absolute;
+    right:1.2rem;
+}
+.settlement{
+    width:.8rem;
+    height:100%;
+    background:red;
+    color:white;
+    text-align:center;
+    line-height:.4rem;
+    position: absolute;
+    right:0;
+    font-size: .16rem;
+}
+.delete{
+    width:.2rem;
+    height:.2rem;
+    background:#ff4965;
+    color:white;
+    text-align:center;
+    line-height:.2rem;
+    position: absolute;
+    left:.7rem;
 }

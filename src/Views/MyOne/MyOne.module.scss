@@ -1,10 +1,12 @@
 .clear:after{ content:""; display: block; clear:both;}
 .block{
     float: left;
+    width:50%;
+    box-sizing:border-box;
+    padding:0 .03rem 0 .03rem;
 }
 .imgs{
-    width: 1.87rem;
-    height:1.70rem;
+    width: 100%;
 }
 .title{ 
     width:1.5rem;
