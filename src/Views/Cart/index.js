@@ -124,9 +124,10 @@ class Cart extends Component{
     checkClick(){
         const { checkedAll,datalist } = this.state;
 
-        datalist.map(function(item){
-            return item.checked = !item.checked;
-          })
+            datalist.map(function(item){
+                return item.checked = !checkedAll;
+            })
+
 
           const check = datalist.every(function(item,index){
             return item.checked;
